@@ -24,7 +24,7 @@ Firstly, assume we have already obtained the weight matrices W_center and W_cont
 
 Softmax:
 
-![softmax](images/lectures/softmax.png)
+![softmax](images/lecture2/softmax.png)
 
 In this algorithm, there are 2 word vectors for each word, namely, **center vector** and **context vector**.
 * v_c: word vector associated with the center word
