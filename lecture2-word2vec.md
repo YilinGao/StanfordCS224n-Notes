@@ -24,7 +24,7 @@ Firstly, assume we have already obtained the weight matrices W_center and W_cont
 
 Softmax:
 
-![softmax]()
+![softmax](images/lectures/softmax.png)
 
 In this algorithm, there are 2 word vectors for each word, namely, **center vector** and **context vector**.
 * v_c: word vector associated with the center word
@@ -42,13 +42,13 @@ As mentioned at the beginning, the algorithm is indifferent to the offset of the
 
 The next question for us is, how to get the weight matrices W_center and W_context. One naive and basic training method is to use the softmax form to minimize the loss function.
 
-![optimization1]()
+![optimization1](images/lecture2/optimization1.png)
 
-![optimization2]()
+![optimization2](images/lecture2/optimization2.png)
 
-![optimization3]()
+![optimization3](images/lecture2/optimization3.png)
 
-![optimization4]()
+![optimization4](images/lecture2/optimization4.png)
 
 After we plug the conditional probability function p(o|c) into the **objective/loss function**, we are able to derive it on both v_c and u_o for all V words (i.e., all parameters in the model) and get the V-by-1 gradient of the loss function on the v_c vector, and the V-by-1 gradient of the loss function on the u_o vector. With 2 gradients, we are able to do **gradient descent** and get the optimized values of v_c and u_o for each word. The V 1-by-d vectors for v_c make up the rows of W_center, and the V 1-by-d vectors for u_o make up the rows of W_context.
 
