@@ -8,7 +8,7 @@ Things we need:
 * V (1-by-1): number of words in the vocabulary (eg, 10000)
 * d (1-by-1): number of features to describe words (eg, 300)
 * W_center (V-by-d): word weight matrix (eg, 10000-by-300) with each row as the weight vector for each word when the word is used as a center word
-* W_context (V_by-d): word weight matrix (eg, 10000-by-300) with each row as the weight vector for each word when the word is used as a context word, this matrix is different from the center word weight matrix
+* W_context (V-by-d): word weight matrix (eg, 10000-by-300) with each row as the weight vector for each word when the word is used as a context word, this matrix is different from the center word weight matrix
 * input vector w_c (V-by-1): a **one-hot vector** to represent each word in the vocabulary. For the V elements in the vector, only one element is 1, and all other elements are 0. The input matrix for each word is different.
 * output vector (V-by-1): a vector with V float elements to represent p(w|w_c) (the probability that a randomly selected nearby word around the word w_c is that word) for all V words. 
 
@@ -29,6 +29,8 @@ Softmax:
 In this algorithm, there are 2 word vectors for each word, namely, **center vector** and **context vector**.
 * v_c: word vector associated with the center word
 * u_o: word vector associated with word at index o
+
+*Note: all indices here are for the vocabulary, i.e, some number out of V, not necessarily correlated with positions of the word in the resource data.*
 
 v_c = (W_center)'*w_c (d-by-1, the transpose of the center weight matrix times the input matrix of the center word). In other words, this is to get the 1-by-d row in the weight matrix for the word and then transpose it to d-by-1. The d elements in the vector represent the weights for the center word on d features.
 
