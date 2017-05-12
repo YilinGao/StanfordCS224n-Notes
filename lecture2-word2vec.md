@@ -2,7 +2,7 @@
 
 ## Skip-grams Algorithm
 
-**Skip-grams (SG)** algorithm to predict context words given a target word. This algorithm is independent of the relative positions (offset) of context words and the target word. For example, given a sentence "I like natural language processing." and a window size of 2 words, the algorithm does not discriminate p(natural|processing) with P(language|processing) itself.
+**Skip-grams (SG)** algorithm predicts context words given a target word. This algorithm is independent of the relative positions (offset) of context words and the target word. 
 
 Things we need:
 * V (1-by-1): number of words in the vocabulary (eg, 10000)
@@ -20,11 +20,12 @@ What we need to do is to train the two weight matrices according to certain rule
 
 ### From weight matrices to output vectors
 
-Firstly, assume we have already obtained the weight matrices W_center and W_context, the softmax form tells us about how to compute the output vector.
+First, assuming we have already obtained the weight matrices W_center and W_context, the softmax form then tells us about how to compute the output vector.
 
 Softmax:
 
 ![softmax](images/lecture2/softmax.png)
+(from [class slide](http://web.stanford.edu/class/cs224n/lectures/cs224n-2017-lecture2.pdf))
 
 In this algorithm, there are 2 word vectors for each word, namely, **center vector** and **context vector**.
 * v_c: word vector associated with the center word
@@ -51,6 +52,8 @@ The next question for us is, how to get the weight matrices W_center and W_conte
 ![optimization3](images/lecture2/optimization3.png)
 
 ![optimization4](images/lecture2/optimization4.png)
+
+(from [class slide](http://web.stanford.edu/class/cs224n/lectures/cs224n-2017-lecture2.pdf))
 
 After we plug the conditional probability function p(o|c) into the **objective/loss function**, we are able to derive it on both v_c and u_o for all V words (i.e., all parameters in the model) and get the V-by-1 gradient of the loss function on the v_c vector, and the V-by-1 gradient of the loss function on the u_o vector. With 2 gradients, we are able to do **gradient descent** and get the optimized values of v_c and u_o for each word. The V 1-by-d vectors for v_c make up the rows of W_center, and the V 1-by-d vectors for u_o make up the rows of W_context.
 
