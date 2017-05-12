@@ -25,7 +25,7 @@ First, assuming we have already obtained the weight matrices W_center and W_cont
 Softmax:
 
 ![softmax](images/lecture2/softmax.png)
-(from [class slide](http://web.stanford.edu/class/cs224n/lectures/cs224n-2017-lecture2.pdf))
+(from [class slides](http://web.stanford.edu/class/cs224n/lectures/cs224n-2017-lecture2.pdf))
 
 In this algorithm, there are 2 word vectors for each word, namely, **center vector** and **context vector**.
 * v_c: word vector associated with the center word
@@ -37,7 +37,7 @@ v_c = (W_center)'*w_c (d-by-1, the transpose of the center weight matrix times t
 
 u_x = (W_context)'*w_x(d-by-1, the transpose of the context weight matrix times the input matrix of the context word). Same as for v_c, the d elements in the vector represent the weights for the context word on d features. For the softmax formula, we need the weight vector for all V context words, while the special one is u_o.
 
-Then we can plug in v_c and u_x's into the softmax formula, and get a V-by-1 vector with each float element as exp(u_o'v_c)/sum(u_x'v_c). For different context words with the same center word, the large nominators are all same.
+Then we can plug v_c and u_x's into the softmax formula, and get a V-by-1 vector with each float element as exp(u_o'v_c)/sum(u_x'v_c). For different context words with the same center word, the large nominators are all same.
 
 For different center words, we need to move the window from the index 1 to index V to switch the center word, and do the same things for each center word.
 
@@ -55,7 +55,7 @@ The next question for us is, how to get the weight matrices W_center and W_conte
 
 ![optimization4](images/lecture2/optimization4.png)
 
-(from [class slide](http://web.stanford.edu/class/cs224n/lectures/cs224n-2017-lecture2.pdf))
+(from [class slides](http://web.stanford.edu/class/cs224n/lectures/cs224n-2017-lecture2.pdf))
 
 After we plug the conditional probability function p(o|c) into the **objective/loss function**, we are able to derive it on both v_c and u_o for all V words (i.e., all parameters in the model) and get the V-by-1 gradient of the loss function on the v_c vector, and the V-by-1 gradient of the loss function on the u_o vector. With 2 gradients, we are able to do **gradient descent** and get the optimized values of v_c and u_o for each word. The V 1-by-d vectors for v_c make up the rows of W_center, and the V 1-by-d vectors for u_o make up the rows of W_context.
 
