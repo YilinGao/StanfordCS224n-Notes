@@ -84,6 +84,8 @@ One useful technique to make the algorithm work well is to randomize the index o
 ![SGD](images/lecture2/sgd.png)
 (from [class slides](http://web.stanford.edu/class/cs224n/lectures/cs224n-2017-lecture2.pdf))
 
+One problem for SGD is that the gradient vectors on V and U are **sparse**. For the gradient vector on V, only 1 element is non-zero. For the gradient vector on U, only 2m out of V elements are non-zero. This is a waster of space and time. **Solutions** in lecture 3.
+
 ### Hyper-parameters
 
 In this algorithm, all paramters we focus on optimization are the center weight matrix and the context weight matrix, in other words, the V 1-by-d center word vectors and V 1-by-d context word vectors. But there are other hyperparameters we can adjust to get different model performances.
