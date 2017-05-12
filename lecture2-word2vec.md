@@ -37,7 +37,9 @@ v_c = (W_center)'*w_c (d-by-1, the transpose of the center weight matrix times t
 
 u_x = (W_context)'*w_x(d-by-1, the transpose of the context weight matrix times the input matrix of the context word). Same as for v_c, the d elements in the vector represent the weights for the context word on d features. For the softmax formula, we need the weight vector for all V context words, while the special one is u_o.
 
-Then we can plug in v_c and u_x's into the softmax formula, and get a V-by-1 vector with each float element as exp(u_o'v_c)/sum(u_x'v_c).
+Then we can plug in v_c and u_x's into the softmax formula, and get a V-by-1 vector with each float element as exp(u_o'v_c)/sum(u_x'v_c). For different context words with the same center word, the large nominators are all same.
+
+For different center words, we need to move the window from the index 1 to index V to switch the center word, and do the same things for each center word.
 
 As mentioned at the beginning, the algorithm is indifferent to the offset of the context word relative to the center word. From the output vector, we only know the probability that each word in the vocabulary occurs around a window of size m of the center word. We have no idea about which word will occur on which position (eg, t-1 or t+5).
 
@@ -58,6 +60,8 @@ The next question for us is, how to get the weight matrices W_center and W_conte
 After we plug the conditional probability function p(o|c) into the **objective/loss function**, we are able to derive it on both v_c and u_o for all V words (i.e., all parameters in the model) and get the V-by-1 gradient of the loss function on the v_c vector, and the V-by-1 gradient of the loss function on the u_o vector. With 2 gradients, we are able to do **gradient descent** and get the optimized values of v_c and u_o for each word. The V 1-by-d vectors for v_c make up the rows of W_center, and the V 1-by-d vectors for u_o make up the rows of W_context.
 
 ### Gradient descent
+
+### Stochastic gradient descent
 
 ### Hyper-parameters
 
