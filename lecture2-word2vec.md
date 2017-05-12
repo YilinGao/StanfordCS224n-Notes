@@ -63,9 +63,11 @@ After we plug the conditional probability function p(o|c) into the **objective/l
 
 Generally in each window we will update all parameters that are **used** in that window (not all 2V word vectors). But in terms of gradient descent, to minimize the objective function over the entire training data, we are required to compute gradients for all windows, or for **all 2V elements of \theta**.
 
-![gradient descent1]() 
+![gradient descent1](images/lecture2/gd1.png)
 
-![gradient descent2]()
+![gradient descent2](images/lecture2/gd2.png)
+
+![gradient descent3](images/lecture2/gd3.png)
 
 (from [class slides](http://web.stanford.edu/class/cs224n/lectures/cs224n-2017-lecture2.pdf))
 
@@ -79,7 +81,7 @@ An idea is in each update we only focus on one window `t`, i.e, **one center wor
 
 One useful technique to make the algorithm work well is to randomize the index of window choosen in each move.
 
-![SGD]()
+![SGD](images/lecture2/sgd.png)
 (from [class slides](http://web.stanford.edu/class/cs224n/lectures/cs224n-2017-lecture2.pdf))
 
 ### Hyper-parameters
