@@ -61,7 +61,26 @@ After we plug the conditional probability function p(o|c) into the **objective/l
 
 ### Gradient descent
 
+Generally in each window we will update all parameters that are **used** in that window (not all 2V word vectors). But in terms of gradient descent, to minimize the objective function over the entire training data, we are required to compute gradients for all windows, or for **all 2V elements of \theta**.
+
+![gradient descent1]() 
+
+![gradient descent2]()
+
+(from [class slides](http://web.stanford.edu/class/cs224n/lectures/cs224n-2017-lecture2.pdf))
+
+The idea of gradient descent: subtracting a small fraction of the gradient/derivative from the estimated parameter will generate a parameter generating a objective value closer to minimum. (This is correct.) Gradient/derivative gives the direction of steepest descent. We can go to the minimum if we walk a little bit each time in the direction. The things is not to move too fast to miss the minimum (step size \alpha).
+
 ### Stochastic gradient descent
+
+Because the size of corpus can be very large in real life, in the algorithm of gradient descent, for each update/move we need to compute the derivative for all 2V parameters, which takes forever to finish. 
+
+An idea is in each update we only focus on one window `t`, i.e, **one center word and several context words around it**. We only update the center word vector of the center word and the context word vectors of these context words in each move. Thus, in each move we don't see the majority of the corpus, which incorporates much noise and cannot guarantee a global minimum. But we can move the window to do many such local updates. In fact SGD work well, not only because it is faster, but actually neural networks love noise themselves. 
+
+One useful technique to make the algorithm work well is to randomize the index of window choosen in each move.
+
+![SGD]()
+(from [class slides](http://web.stanford.edu/class/cs224n/lectures/cs224n-2017-lecture2.pdf))
 
 ### Hyper-parameters
 
